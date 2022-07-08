@@ -18,13 +18,13 @@ public class UserService {
         return this.userRepository.findAll();
     }
 
-    public String successLogin(String username, String password) {
+    public User successLogin(String username, String password) {
         List<User> listUsers = this.userRepository.findAll();
         listUsers.removeIf(user -> !(user.getUsername().equals(username) && user.getPassword().equals(password)));
         if (listUsers.isEmpty()) {
-            return "User not found";
+            return null;
         }
-        return "User Success Login";     
+        return listUsers.get(0);     
     }
 
 }
