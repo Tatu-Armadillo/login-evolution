@@ -18,9 +18,9 @@ public class UserService {
         return this.userRepository.findAll();
     }
 
-    public User successLogin(String username, String password) {
+    public User successLogin(User user) {
         List<User> listUsers = this.userRepository.findAll();
-        listUsers.removeIf(user -> !(user.getUsername().equals(username) && user.getPassword().equals(password)));
+        listUsers.removeIf(userDb -> !(userDb.getUsername().equals(user.getUsername()) && userDb.getPassword().equals(user.getPassword())));
         if (listUsers.isEmpty()) {
             return null;
         }

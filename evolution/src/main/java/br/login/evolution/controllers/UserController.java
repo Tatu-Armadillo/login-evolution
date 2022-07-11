@@ -5,7 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.login.evolution.models.User;
@@ -20,11 +21,10 @@ public class UserController {
 
     final static String success = "Consulta realizada com sucesso";
 
-    @GetMapping("/login")
-    public ResponseEntity<ResponseBase<User>> getSuccessLogin(@RequestParam String username,
-            @RequestParam String password) {
-        final User user = this.userService.successLogin(username, password);
-        final var response = new ResponseBase<User>(user, success, true);
+    @PostMapping("/login")
+    public ResponseEntity<ResponseBase<User>> getSuccessLogin(@RequestBody User user) {
+        final User userLog = this.userService.successLogin(user);
+        final var response = new ResponseBase<User>(userLog, success, true);
         return ResponseEntity.ok(response);
     }
 

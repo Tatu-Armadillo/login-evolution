@@ -1,16 +1,20 @@
 const URL = 'http://localhost:8080/evo/';
 
 const user = {
-    idUsuario: undefined,
     username: undefined,
     password: undefined
 };
 
 const singIn = () => {
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
+    user.username = document.getElementById('username').value;
+    user.password = document.getElementById('password').value;
 
-    fetch(URL + `login?username=${username}&password=${password}`, { method: "GET" })
+    fetch(URL + `login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(user)
+
+    })
         .then(dado => dado.json())
         .then(d => {
             if (d.data) {
