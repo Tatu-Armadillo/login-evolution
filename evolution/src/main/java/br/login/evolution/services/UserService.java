@@ -19,12 +19,8 @@ public class UserService {
     }
 
     public User successLogin(User user) {
-        List<User> listUsers = this.userRepository.findAll();
-        listUsers.removeIf(userDb -> !(userDb.getUsername().equals(user.getUsername()) && userDb.getPassword().equals(user.getPassword())));
-        if (listUsers.isEmpty()) {
-            return null;
-        }
-        return listUsers.get(0);     
+        User login = this.userRepository.loginUser(user.getUsername(), user.getPassword());
+        return login;     
     }
 
 }
